@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (credentials.username === "abc@xyz.com" && credentials.password === "abc123") {
+    if (credentials.username === "admin" && credentials.password === "admin") {
       navigate("/catalog");
     } else {
       alert("Invalid credentials!");

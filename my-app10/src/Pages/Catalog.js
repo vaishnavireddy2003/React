@@ -11,7 +11,7 @@ const Catalog = () => {
   return (
     <div className="body">
       <h2>Welcome to the Catalog Page!</h2>
-      <button onClick={handleLogout} className="logout-btn">Logout</button>
+      <button onClick={handleLogout} className="logout-btn" style={{ marginLeft: "30px" }}>Logout</button>
     </div>
   );
 };

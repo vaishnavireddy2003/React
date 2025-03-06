@@ -1,26 +1,50 @@
-import { useState, useEffect } from "react";
-import ClockComponent from "react-clock";
-import "react-clock/dist/Clock.css";
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-export default function Clock() {
+const Clock = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-xl">
-      <h1 className="text-3xl font-bold text-gray-700">Live Clock</h1>
-      <ClockComponent value={time} size={150} />
-      <p className="text-lg text-gray-500">{time.toDateString()}</p>
-      <p className="text-2xl mt-2 text-blue-500 font-mono">
-        {time.toLocaleTimeString()}
-      </p>
+    <div className="clock-container">
+      {/* Analog Clock */}
+      <div className="analog-clock">
+        <div className="clock-face">
+          <div
+            className="hour-hand"
+            style={{
+              transform: `rotate(${(time.getHours() % 12) * 30 + time.getMinutes() * 0.5}deg)`,
+            }}
+          />
+          <div
+            className="minute-hand"
+            style={{
+              transform: `rotate(${time.getMinutes() * 6}deg)`,
+            }}
+          />
+          <div
+            className="second-hand"
+            style={{
+              transform: `rotate(${time.getSeconds() * 6}deg)`,
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Digital Clock */}
+      <div className="digital-clock">
+        <h1>Live Clock</h1>
+        <h2>{time.toLocaleDateString()}</h2>
+        <h3>{time.toLocaleTimeString()}</h3>
+      </div>
     </div>
   );
-}
+};
+
+export default Clock;
