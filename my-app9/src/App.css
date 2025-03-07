@@ -1,0 +1,88 @@
+/* Center the entire app */
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+/* Style for the clock container */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Analog Clock */
+.analog-clock {
+  width: 150px;
+  height: 150px;
+  border: 5px solid black;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hands of the clock */
+.clock-face::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+  position: absolute;
+  width: 4px;
+  background: black;
+  transform-origin: bottom center;
+  bottom: 50%;
+}
+
+.hour-hand {
+  height: 35px;
+  width: 6px;
+  background: black;
+}
+
+.minute-hand {
+  height: 50px;
+  width: 4px;
+  background: gray;
+}
+
+.second-hand {
+  height: 60px;
+  width: 2px;
+  background: red;
+}
+
+/* Digital Clock */
+.digital-clock {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+h2, h3 {
+  color: #555;
+}
