@@ -1,0 +1,109 @@
+.dashboard-container {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+  
+  /* Logout Button */
+  .logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Product Grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  /* Product Card */
+  .product-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Product Image */
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Product Name */
+  .product-name {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  /* Product Price */
+  .product-price {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  /* Add to Cart Button */
+  .add-to-cart-button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .add-to-cart-button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Cart Button */
+  .cart-button {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .cart-button:hover {
+    opacity: 0.9;
+  }
+  
