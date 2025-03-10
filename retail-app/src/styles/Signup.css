@@ -1,0 +1,14 @@
+/* styles/Signup.css */
+@import "./Login.css"; /* Reuse styles from Login */
+
+.form-box {
+  width: 400px;
+}
+
+.input-box input {
+  padding: 12px 15px;
+}
+
+.btn {
+  margin-top: 10px;
+}
