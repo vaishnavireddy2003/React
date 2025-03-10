@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Signup.css"; 
+import "../styles/Signup.css"; // Import CSS
 
-const SignUpForm = () => {
-  const [username, setUsername] = useState("");
+const SignupForm = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -19,39 +19,54 @@ const SignUpForm = () => {
     }
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    if (users.some((user) => user.email === email)) {
-      setMessage("Email is already registered!");
+    const userExists = users.some(user => user.email === email);
+    
+    if (userExists) {
+      setMessage("Email already registered!");
       return;
     }
 
-    const newUser = { username, email, password };
-    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+    const newUser = { fullName, email, password };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
 
-    alert("Signup successful! Please login.");
-    navigate("/");
+    setMessage("Registration successful! Redirecting...");
+
+    setTimeout(() => navigate("/login"), 1500);
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <label>Username</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+    <div className="signup-container">
+      <div className="signup-box">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSignup}>
+          <div className="input-container">
+            <input type="text" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+          </div>
+          <div className="input-container">
+            <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div className="input-container">
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <div className="input-container">
+            <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+          </div>
 
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <button type="submit" className="signup-btn">REGISTER</button>
+          {message && <p className="error-message">{message}</p>}
+        </form>
 
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-
-        <label>Confirm Password</label>
-        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-
-        <button type="submit">Sign Up</button>
-        {message && <p>{message}</p>}
-      </form>
+        <p className="signin-link">
+          Already have an account? 
+          <span 
+            className="login-link"
+            onClick={() => navigate("/")}
+          > Sign in</span>
+        </p>
+      </div>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignupForm;

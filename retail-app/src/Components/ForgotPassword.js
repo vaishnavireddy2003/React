@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/ForgotPassword.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -23,11 +24,9 @@ const ForgotPassword = () => {
       return;
     }
 
-    // Generate random 6-digit OTP
     const otpCode = Math.floor(100000 + Math.random() * 900000);
     setGeneratedOtp(otpCode);
 
-    // Store OTP temporarily
     localStorage.setItem("resetOtp", otpCode);
     localStorage.setItem("resetEmail", email);
 
@@ -35,7 +34,6 @@ const ForgotPassword = () => {
     setStep(2);
   };
 
-  // Verify OTP
   const verifyOtp = () => {
     const storedOtp = localStorage.getItem("resetOtp");
     if (otp === storedOtp) {
@@ -46,7 +44,6 @@ const ForgotPassword = () => {
     }
   };
 
-  // Reset Password
   const resetPassword = () => {
     if (newPassword !== confirmPassword) {
       setMessage("Passwords do not match.");
@@ -67,38 +64,68 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
-      <h2>Forgot Password</h2>
+    <div className="forgot-password-container">
+      <div className="forgot-password-box">
+        <h2>Forgot Password</h2>
 
-      {step === 1 && (
-        <>
-          <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <button onClick={sendOtp}>Send OTP</button>
-        </>
-      )}
+        {step === 1 && (
+          <>
+            <div className="input-container">
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <button className="forgot-btn" onClick={sendOtp}>Send OTP</button>
+          </>
+        )}
 
-      {step === 2 && (
-        <>
-          <label>Enter OTP</label>
-          <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} required />
-          <button onClick={verifyOtp}>Verify OTP</button>
-        </>
-      )}
+        {step === 2 && (
+          <>
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </div>
+            <button className="forgot-btn" onClick={verifyOtp}>Verify OTP</button>
+          </>
+        )}
 
-      {step === 3 && (
-        <>
-          <label>New Password</label>
-          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+        {step === 3 && (
+          <>
+            <div className="input-container">
+              <input
+                type="password"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+              />
+            </div>
 
-          <label>Confirm Password</label>
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+            <div className="input-container">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
 
-          <button onClick={resetPassword}>Reset Password</button>
-        </>
-      )}
+            <button className="forgot-btn" onClick={resetPassword}>Reset Password</button>
+          </>
+        )}
 
-      {message && <p>{message}</p>}
+        {message && <p className="message">{message}</p>}
+      </div>
     </div>
   );
 };

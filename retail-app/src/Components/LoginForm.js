@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/Login.css"; // Import the CSS file
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -10,8 +10,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
-    if (rememberedUser) {
+    const storedUser = localStorage.getItem("rememberedUser");
+    if (storedUser) {
       navigate("/dashboard");
     }
   }, [navigate]);
@@ -19,15 +19,13 @@ const LoginForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const validUser = users.find((user) => user.email === email && user.password === password);
+    const validUser = users.find(user => user.email === email && user.password === password);
 
     if (validUser) {
       localStorage.setItem("loggedInUser", JSON.stringify(validUser));
-
       if (rememberMe) {
         localStorage.setItem("rememberedUser", JSON.stringify(validUser));
       }
-
       navigate("/dashboard");
     } else {
       setMessage("Invalid email or password.");
@@ -35,31 +33,43 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Sign In</h2>
+        <form onSubmit={handleLogin}>
+          <div className="input-container">
+            <input
+              type="email"
+              placeholder="Enter your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="options">
+            <div className="remember-container">
+              <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
+              <label htmlFor="rememberMe">Remember me</label>
+            </div>
+            <a href="/forgot-password">Forgot Password?</a>
+          </div>
+          <button type="submit" className="login-btn">LOGIN</button>
+          {message && <p className="error-message">{message}</p>}
+        </form>
 
-        <div>
-          <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
-          <label>Remember Me</label>
-        </div>
-
-        <button type="submit">Login</button>
-
-        {message && <p>{message}</p>}
-
-        <p>
-          New User? <button onClick={() => navigate("/signup")}>Sign Up</button>
+        <p className="signup-link">
+          Don’t have an account? <a href="/signup">Sign up</a>
         </p>
-        <p>
-          Forgot Password? <button onClick={() => navigate("/forgot-password")}>Reset</button>
-        </p>
-      </form>
+      </div>
     </div>
   );
 };
