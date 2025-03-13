@@ -1,0 +1,122 @@
+Data Flow Diagram (DFD) for Accident Management System
+This Accident Management System consists of the following core modules:
+
+User Authentication (Login/Register)
+Accident Reporting
+Accident List & Management
+
+1. Level 0 DFD (Context Diagram)
+The Context Diagram provides an overview of the system, showing external entities interacting with it.
+
+Entities:
+
+1.* User → Can Register/Login and Report an Accident.
+
+2.*Admin → Can View/Delete Reported Accidents.
+
+3.*System → Processes Requests, Stores Data in MongoDB.
+
+Process Overview:
+
+The User registers or logs in.
+A logged-in user reports an accident.
+The Admin or authorized users can view the list of accidents.
+The Admin can delete accident records.
+📌 Diagram Representation
+
+pgsql
+Copy
+Edit
++----------+        +---------------------------+        +------------+
+|  User    | -----> |  Accident Management Sys  | -----> |  Database  |
++----------+        +---------------------------+        +------------+
+       ↑                      |                           ↑
+       |                      |                           |
+       |    Register/Login     | Store User Data          |
+       |                      |                           |
+       |    Report Accident    | Store Accident Reports   |
+       |                      |                           |
+       |    View Accidents     | Retrieve Data            |
+       |                      |                           |
+       |    Delete Accident    | Remove Record            |
+
+2. Level 1 DFD (Detailed Processes)
+
+This breaks down the main system into individual modules.
+
+Processes:
+User Authentication (Login/Register)
+
+User Registers with Email & Password.
+User Logs In with credentials.
+System verifies user details in the database.
+Accident Reporting
+
+User submits accident details (Location, Description).
+System stores accident data in the database.
+Accident List & Management
+
+Admin retrieves a list of accidents.
+Admin can delete accident records.
+📌 Diagram Representation
+
+sql
+Copy
+Edit
++----------+         +------------------------+        +------------+
+|  User    | ----->  |   (1) Register/Login   | -----> |  Database  |
++----------+         +------------------------+        +------------+
+        |                      |
+        |                      V
+        |            +---------------------+
+        |------------> (2) Report Accident |
+        |            +---------------------+
+        |                      |
+        |                      V
+        |            +----------------------+
+        |------------> (3) View/Delete List |
+                     +----------------------+
+3. Entities & Explanation
+
+1️⃣ User Entity
+
+Registers/Login to the system
+Reports an accident
+Views accident reports
+
+2️⃣ Admin Entity
+
+Views all accident reports
+Deletes accident records if needed
+
+3️⃣ System (Accident Management System)
+
+Handles authentication requests
+Stores accident data
+Manages accident reports
+
+4. Level 2 DFD (Detailed Data Interactions)
+Process Breakdown:
+
+(1) Authentication (Login/Register)
+
+Input: User enters credentials.
+Process: System verifies credentials.
+Output: Successful login or error message.
+
+(2) Report Accident
+
+Input: User provides accident details.
+Process: System stores accident details.
+Output: Confirmation message.
+
+(3) View Accident List
+
+Input: Admin requests accident data.
+Process: System fetches stored accidents.
+Output: List of accidents displayed.
+
+(4) Delete Accident
+Input: Admin selects a report to delete.
+Process: System removes accident record.
+Output: Updated accident list.
